@@ -1,19 +1,17 @@
-package com.knoldus.trainning.StackOverflowApplication.entities;
+package com.knoldus.trainning.StackOverflowApplication.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "questions")
 public class Questions {
 
 
@@ -26,14 +24,5 @@ public class Questions {
     private String questionTitle;
 
     private String questionDescription;
-
-
-    public Long getId() {
-        return questionId;
-    }
-
-    public void setId(Long id) {
-        this.questionId = id;
-    }
 
 }
