@@ -1,12 +1,10 @@
 package com.knoldus.trainning.StackOverflowApplication.entity;
 
-import org.hibernate.annotations.GeneratorType;
-
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class UserCO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
@@ -15,13 +13,13 @@ public class User {
     private String username;
     private String password;
 
-    public User(Long id, String username, String password) {
+    public UserCO(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
 
-    public User() {
+    public UserCO() {
     }
 
     @Override

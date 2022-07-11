@@ -1,6 +1,6 @@
 package com.knoldus.trainning.StackOverflowApplication.securityConfig;
 
-import com.knoldus.trainning.StackOverflowApplication.entity.User;
+import com.knoldus.trainning.StackOverflowApplication.entity.UserCO;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,8 +10,8 @@ import java.util.Collections;
 
 public class UserPrinciple implements UserDetails {
 
-    private User user;
-    public UserPrinciple(User user) {
+    private UserCO user;
+    public UserPrinciple(UserCO user) {
         super();
         this.user = user;
     }
