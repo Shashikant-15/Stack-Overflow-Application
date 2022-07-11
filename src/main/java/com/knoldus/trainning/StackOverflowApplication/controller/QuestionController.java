@@ -1,12 +1,7 @@
 package com.knoldus.trainning.StackOverflowApplication.controller;
 
-import com.knoldus.trainning.StackOverflowApplication.entity.QuestionPost;
-import com.knoldus.trainning.StackOverflowApplication.repository.QuestionRepository;
-import com.knoldus.trainning.StackOverflowApplication.service.QuestionService;
-import java.util.Optional;
+
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,42 +11,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
-@RequestMapping("/control")
+@RequestMapping("user/{userId}/questions")
 @AllArgsConstructor
 @RestController
 public class QuestionController {
 
 
-    @Autowired
-    private QuestionService questionService;
-
-    @Autowired
-    private QuestionRepository questionRepository;
-
-
-
-    @PostMapping("/add")
-    public void add( ) {
+    @PostMapping()
+    public void addNewQuestion( ) {
 
     }
 
 
-    @GetMapping("/get/{id}")
-    public Optional<QuestionPost> getPostById(@PathVariable("id") Long id) {
-
-        return getPostById(id);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deletePostById(@PathVariable("id") Long id) {
+    @GetMapping("/{id}")
+    public void getQuestionById(@PathVariable Long id ) {
 
     }
+    @GetMapping()
+    public void getAllQuestionByUserId(@PathVariable Long userId ) {
+
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteQuestionById(@PathVariable Long id) {
+
+    }
 
 
-    @PutMapping("/author/{id}")
-    public QuestionPost update(){
-        return new  QuestionPost();
+    @PutMapping("/{id}")
+    public void updateQuestionById(){
+
     }
 
 
