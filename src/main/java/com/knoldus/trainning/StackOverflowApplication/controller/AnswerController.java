@@ -3,19 +3,28 @@ package com.knoldus.trainning.StackOverflowApplication.controller;
 import com.knoldus.trainning.StackOverflowApplication.entity.Answer;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/question/{questionId}/answers")
 public class AnswerController {
-
-    @GetMapping
-    public List<Answer> getAllAnswers(@PathVariable String questionId) {
-        
+    @PostMapping()
+    public void addAnswer(@RequestBody Answer answer, @PathVariable Long questionId) {
+        //answer.setQuestion(new Question(questionId, "", ""));
     }
 
-    @PostMapping
-    public void addAnswer(@RequestBody Question question, @PathVariable String questionId) {
+    @GetMapping("/{id}")
+    public void getAnswerById(@PathVariable Long id) {
+    }
 
+    @GetMapping()
+    public void getAllAnswerByQuestionId(@PathVariable Long userId) {
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteAnswerById(@PathVariable Long id) {
+    }
+
+    @PutMapping("/{id}")
+    public void updateAnswerById(){
+        //answer.setQuestion(new Question(questionId, "", ""));
     }
 }

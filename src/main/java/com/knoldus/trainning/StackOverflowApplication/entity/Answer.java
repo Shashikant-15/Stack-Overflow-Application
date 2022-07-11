@@ -3,12 +3,11 @@ package com.knoldus.trainning.StackOverflowApplication.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,7 +17,13 @@ import javax.persistence.Table;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String answerId;
+    private Long answerId;
     private String inputAnswer;
-    //private Question question;
+    @CreationTimestamp
+    private Timestamp createdAt;
+    @CreationTimestamp
+    private Timestamp updatedAt;
+//    @ManyToOne
+//    private Question question;
+
 }
