@@ -1,6 +1,7 @@
 package com.knoldus.trainning.StackOverflowApplication.controller;
 
 import com.knoldus.trainning.StackOverflowApplication.entity.Answer;
+import com.knoldus.trainning.StackOverflowApplication.entity.Question;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 public class AnswerController {
     @PostMapping()
     public void addAnswer(@RequestBody Answer answer, @PathVariable Long questionId) {
-        //answer.setQuestion(new Question(questionId, "", ""));
+        answer.setQuestion(new Question(questionId, "", ""));
     }
 
     @GetMapping("/{id}")
@@ -24,7 +25,7 @@ public class AnswerController {
     }
 
     @PutMapping("/{id}")
-    public void updateAnswerById(){
-        //answer.setQuestion(new Question(questionId, "", ""));
+    public void updateAnswerById(@RequestBody Answer answer, @PathVariable Long questionId){
+        answer.setQuestion(new Question(questionId, "", ""));
     }
 }
