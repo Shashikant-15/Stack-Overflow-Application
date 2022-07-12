@@ -1,6 +1,7 @@
 package com.knoldus.trainning.StackOverflowApplication.controller;
 
-import com.knoldus.trainning.StackOverflowApplication.entity.UserCO;
+import com.knoldus.trainning.StackOverflowApplication.CO.UserCO;
+import com.knoldus.trainning.StackOverflowApplication.entity.User;
 import com.knoldus.trainning.StackOverflowApplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,9 +28,12 @@ public class HomeController {
     }
 
     @PostMapping("/save")
-    public ModelAndView save(@ModelAttribute("User") UserCO user)
+    public ModelAndView save(@ModelAttribute("UserCO") UserCO userCO)
     {
         ModelAndView mv = new ModelAndView("redirect:/");
+        User user = new User(userCO.getId(),
+                userCO.getUsername(),userCO.getEmail(),
+                userCO.getPassword(),userCO.getAddress());
         userRepository.save(user);
         return mv;
     }

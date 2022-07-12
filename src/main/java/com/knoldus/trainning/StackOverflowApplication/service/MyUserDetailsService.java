@@ -1,6 +1,6 @@
 package com.knoldus.trainning.StackOverflowApplication.service;
 
-import com.knoldus.trainning.StackOverflowApplication.entity.UserCO;
+import com.knoldus.trainning.StackOverflowApplication.entity.User;
 import com.knoldus.trainning.StackOverflowApplication.repository.UserRepository;
 import com.knoldus.trainning.StackOverflowApplication.securityConfig.UserPrinciple;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserCO user = repo.findByUsername(username);
+        User user = repo.findByUsername(username);
         if(user == null)
         {
             throw new UsernameNotFoundException("Not Found");
