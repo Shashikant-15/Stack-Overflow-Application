@@ -1,4 +1,3 @@
-
 package com.knoldus.trainning.StackOverflowApplication.entity;
 
 import lombok.AllArgsConstructor;
