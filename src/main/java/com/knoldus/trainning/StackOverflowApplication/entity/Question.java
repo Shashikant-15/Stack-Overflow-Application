@@ -4,23 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 import javax.persistence.*;
+import java.security.Timestamp;
+import java.util.Date;
 
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "questions")
+@Table(name = "question")
 public class Question {
-
-
-    @javax.persistence.Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "questionId",nullable = false)
-    private long questionId;
+    private long id;
 
-    @Column(name = "questionTitle", nullable = false)
+    @Column(name = "questionTitle", nullable = false,unique = true)
     private String questionTitle;
 
     private String questionDescription;
