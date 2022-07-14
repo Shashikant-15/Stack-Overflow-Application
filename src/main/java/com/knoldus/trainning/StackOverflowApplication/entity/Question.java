@@ -37,10 +37,10 @@ public class Question {
 //    @ManyToOne
 //    private User user;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
+//    @Temporal(TemporalType.DATE)
+//    private Date createdAt;
+//
+//    @Temporal(TemporalType.DATE)
+//    private Date updatedAt;
 
 }
