@@ -1,35 +1,31 @@
 package com.knoldus.trainning.StackOverflowApplication.entity;
 
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.mongodb.core.index.Indexed;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
-
 
 @Entity
+@Table(name = "user")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class User{
+public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id", nullable = false)
     private Long id;
-    @NotBlank(message = "name of User should not be null")
-    private String firstName;
-    @NotBlank(message = "name of User should not be null")
-    private String lastName;
-    @NotBlank(message = "email  of User should not be null")
-    @Indexed(unique=true)
+
+    @Column(unique = true, nullable = false)
+    private String username;
+
+    @Column(nullable = false)
     private String email;
-    private String designation;
-    private String location;
-    @Column(name= "created_at",nullable = false,updatable = false)
-    @CreationTimestamp
-    private Timestamp createdAt;
 
+    @Column(nullable = false)
+    private String password;
 
-
+    @Column(nullable = false)
+    private String address;
 }
