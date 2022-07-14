@@ -18,7 +18,7 @@ public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "answerId",nullable = false)
-    private Long answerId;
+    private Long id;
     @Column(name = "inputAnswer", nullable = false, unique = true)
     private String inputAnswer;
 //    @Temporal(TemporalType.DATE)

@@ -16,12 +16,10 @@ import java.util.Date;
 @Entity
 @Table(name = "question")
 public class Question {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "questionId",nullable = false)
-    private long questionId;
+    private long id;
 
     @Column(name = "questionTitle", nullable = false,unique = true)
     private String questionTitle;
