@@ -1,5 +1,4 @@
 
-package com.knoldus.trainning.StackOverflowApplication.entity;public class Tag {
 package com.knoldus.trainning.StackOverflowApplication.entity;
 
 import lombok.AllArgsConstructor;
