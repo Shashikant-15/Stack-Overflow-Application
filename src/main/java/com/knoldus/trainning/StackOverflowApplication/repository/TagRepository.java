@@ -1,2 +1,5 @@
-package com.knoldus.trainning.StackOverflowApplication.repository;public interface TagRepository {
+package com.knoldus.trainning.StackOverflowApplication.repository;
+
+public interface TagRepository {
+
 }
