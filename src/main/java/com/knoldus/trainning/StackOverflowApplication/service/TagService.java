@@ -26,7 +26,6 @@ public class TagService {
         return tagRepository.findByName(name);
     }
 
-
    public List<Tag> findAll() {
 
            tagList = (List<Tag>) tagRepository.findAll();
