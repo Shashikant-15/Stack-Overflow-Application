@@ -1,2 +1,5 @@
-package com.knoldus.trainning.StackOverflowApplication.service;public class QuestionService {
+package com.knoldus.trainning.StackOverflowApplication.service;
+
+public class QuestionService {
+
 }
