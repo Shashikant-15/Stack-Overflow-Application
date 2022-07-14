@@ -3,11 +3,8 @@ package com.knoldus.trainning.StackOverflowApplication.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Date;
-
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,7 +12,6 @@ import java.util.Date;
 @Entity
 @Table(name = "question")
 public class Question {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,6 +38,6 @@ public class Question {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    public Question(Long questionId, String a_, String s) {
+    public Question(Long questionId, String s, String s1) {
     }
 }
