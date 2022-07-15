@@ -3,12 +3,8 @@ package com.knoldus.trainning.StackOverflowApplication.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-
 import javax.persistence.*;
-import java.security.Timestamp;
 import java.util.Date;
-
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,7 +21,7 @@ public class Question {
     private String questionTitle;
 
     private String questionDescription;
-
+    
 //    @ManyToMany
 //    private Tag tag;
 
@@ -35,10 +31,10 @@ public class Question {
 //    @ManyToOne
 //    private User user;
 
-//    @Temporal(TemporalType.DATE)
-//    private Date createdAt;
-//
-//    @Temporal(TemporalType.DATE)
-//    private Date updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
 }
