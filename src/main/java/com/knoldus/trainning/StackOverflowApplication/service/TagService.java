@@ -18,18 +18,18 @@ public class TagService {
 
     public Optional<Tag> getAllTag(Long tagId) {
 
-       return tagRepository.findById(tagId);
+        return tagRepository.findById(tagId);
     }
 
     public Optional<Tag> getAllTagByName(String name){
 
-        return tagRepository.findByName(name);
+        return tagRepository.findByTagName(name);
     }
 
-   public List<Tag> findAll() {
+    public List<Tag> findAll() {
 
-           tagList = (List<Tag>) tagRepository.findAll();
-           return tagList;
+        tagList = (List<Tag>) tagRepository.findAll();
+        return tagList;
     }
 
 
@@ -37,7 +37,7 @@ public class TagService {
         tagRepository.save(tag);
     }
 
-   public void deleteById(Long id) {
+    public void deleteById(Long id) {
         tagRepository.deleteById(id);
     }
 }

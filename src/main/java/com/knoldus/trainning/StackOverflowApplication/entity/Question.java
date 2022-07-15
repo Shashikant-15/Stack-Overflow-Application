@@ -1,5 +1,6 @@
 package com.knoldus.trainning.StackOverflowApplication.entity;
 
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,19 +15,19 @@ import java.util.Date;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "questionId",nullable = false)
+    @Column(name = "questionId", nullable = false)
     private long id;
 
-    @Column(name = "questionTitle", nullable = false,unique = true)
+    @Column(name = "questionTitle", nullable = false, unique = true)
     private String questionTitle;
 
     private String questionDescription;
-    
+
 //    @ManyToMany
 //    private Tag tag;
 
-//    @OneToMany
-//   private Answer answer;
+    @OneToMany
+    private Answer answer;
 
 //    @ManyToOne
 //    private User user;
@@ -38,3 +39,4 @@ public class Question {
     private Date updatedAt;
 
 }
+

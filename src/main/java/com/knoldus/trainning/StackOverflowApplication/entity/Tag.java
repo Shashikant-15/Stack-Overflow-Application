@@ -18,6 +18,6 @@ public class Tag {
     private Long id;
 
     @Column(name = "tagName", unique = true, nullable = false)
-    private String tagName;
+    private String name;
 
 }
