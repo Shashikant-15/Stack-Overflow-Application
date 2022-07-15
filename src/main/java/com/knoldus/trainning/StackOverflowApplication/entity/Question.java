@@ -26,4 +26,19 @@ public class Question {
 
     private String questionDescription;
 
+//    @ManyToMany
+//    private Tag tag;
+
+//    @OneToMany
+//   private Answer answer;
+
+//    @ManyToOne
+//    private User user;
+
+//    @Temporal(TemporalType.DATE)
+//    private Date createdAt;
+//
+//    @Temporal(TemporalType.DATE)
+//    private Date updatedAt;
+
 }

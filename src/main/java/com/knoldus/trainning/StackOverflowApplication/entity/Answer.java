@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @AllArgsConstructor
@@ -20,6 +21,10 @@ public class Answer {
     private Long id;
     @Column(name = "inputAnswer", nullable = false, unique = true)
     private String inputAnswer;
+//    @Temporal(TemporalType.DATE)
+//    private Date createdAt;
+//    @Temporal(TemporalType.DATE)
+//    private Date updatedAt;
     @ManyToOne
     private Question question;
 }
