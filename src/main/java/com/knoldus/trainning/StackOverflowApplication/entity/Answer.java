@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
+
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,6 +25,7 @@ public class Answer {
     private Date createdAt;
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
     @ManyToOne
     private Question question;
 }

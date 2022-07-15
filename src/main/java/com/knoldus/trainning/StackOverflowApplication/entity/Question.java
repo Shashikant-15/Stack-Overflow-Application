@@ -37,6 +37,4 @@ public class Question {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-    public Question(Long questionId, String s, String s1) {
-    }
 }
