@@ -2,7 +2,6 @@ package com.knoldus.trainning.StackOverflowApplication.controller;
 
 import com.knoldus.trainning.StackOverflowApplication.entity.Answer;
 import com.knoldus.trainning.StackOverflowApplication.entity.Question;
-import com.knoldus.trainning.StackOverflowApplication.entity.Tag;
 import com.knoldus.trainning.StackOverflowApplication.entity.User;
 import com.knoldus.trainning.StackOverflowApplication.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
