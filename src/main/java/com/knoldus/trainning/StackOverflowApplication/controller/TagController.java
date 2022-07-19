@@ -1,5 +1,3 @@
 package com.knoldus.trainning.StackOverflowApplication.controller;
 
-public class TagController {
-
-}
+public class TagController {}

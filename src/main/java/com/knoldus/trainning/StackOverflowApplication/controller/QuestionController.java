@@ -14,32 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class QuestionController {
 
+  @PostMapping()
+  public void addNewQuestion() {}
 
-    @PostMapping()
-    public void addNewQuestion( ) {
+  @GetMapping("/{id}")
+  public void getQuestionById(@PathVariable Long id) {}
 
-    }
+  @GetMapping()
+  public void getAllQuestionByUserId(@PathVariable Long userId) {}
 
+  @DeleteMapping("/{id}")
+  public void deleteQuestionById(@PathVariable Long id) {}
 
-    @GetMapping("/{id}")
-    public void getQuestionById(@PathVariable Long id ) {
-
-    }
-    @GetMapping()
-    public void getAllQuestionByUserId(@PathVariable Long userId ) {
-
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteQuestionById(@PathVariable Long id) {
-
-    }
-
-
-    @PutMapping("/{id}")
-    public void updateQuestionById(){
-
-    }
-
-
+  @PutMapping("/{id}")
+  public void updateQuestionById() {}
 }
