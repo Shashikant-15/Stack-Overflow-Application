@@ -23,7 +23,7 @@ public class TagService {
 
     public Optional<Tag> getAllTagByName(String name){
 
-        return tagRepository.findByTagName(name);
+        return tagRepository.findByName(name);
     }
 
     public List<Tag> findAll() {
