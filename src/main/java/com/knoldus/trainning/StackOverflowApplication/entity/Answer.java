@@ -20,6 +20,12 @@ public class Answer {
   @Column(name = "inputAnswer", nullable = false)
   private String inputAnswer;
 
+  @ManyToOne(cascade = CascadeType.ALL,
+          fetch = FetchType.LAZY)
+  @JoinColumn(
+          referencedColumnName = "id")
+  private Question question;
+
   @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;
 

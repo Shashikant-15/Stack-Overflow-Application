@@ -1,6 +1,5 @@
 package com.knoldus.trainning.StackOverflowApplication.service;
 
-import com.knoldus.trainning.StackOverflowApplication.entity.Answer;
 import com.knoldus.trainning.StackOverflowApplication.entity.Question;
 import com.knoldus.trainning.StackOverflowApplication.exception.ResourceNotFoundException;
 import com.knoldus.trainning.StackOverflowApplication.repository.QuestionRepository;
@@ -27,9 +26,9 @@ public class QuestionService {
       Question question = new Question();
       question.setQuestionTitle(questionViewRequest.getQuestionTitle());
       question.setQuestionDescription(questionViewRequest.getQuestionDescription());
-      List<Answer> answerList = answerService.save(questionViewRequest.getId(),
-              questionViewRequest.getAnswerList());
-      question.setAnswerList(answerList);
+//      List<Answer> answerList = answerService.save(questionViewRequest.getId(),
+//              questionViewRequest.getAnswerList());
+//      question.setAnswerList(answerList);
       questionRepository.save(question);
     }
 
@@ -50,7 +49,7 @@ public class QuestionService {
       return questionRepository.findById(id).map(question -> {
         question.setQuestionTitle(request.getQuestionTitle());
         question.setQuestionDescription(request.getQuestionDescription());
-        question.setAnswerList(request.getAnswerList());
+//        question.setAnswerList(request.getAnswerList());
         return questionRepository.save(question);
       }).orElseThrow(() -> new ResourceNotFoundException("Question with id : " + id + " not found"));
     }

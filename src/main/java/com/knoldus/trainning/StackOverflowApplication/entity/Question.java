@@ -24,11 +24,11 @@ public class Question {
   @Column(name = "questionDescription")
   private String questionDescription;
 
-  @OneToMany(cascade = CascadeType.ALL,
-          fetch = FetchType.LAZY)
-  @JoinColumn(
-          referencedColumnName = "id")
-  private List<Answer> answerList;
+//  @OneToMany(cascade = CascadeType.ALL,
+//          fetch = FetchType.LAZY)
+//  @JoinColumn(
+//          referencedColumnName = "id")
+//  private List<Answer> answerList;
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;

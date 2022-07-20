@@ -5,6 +5,7 @@ import com.knoldus.trainning.StackOverflowApplication.service.QuestionService;
 import com.knoldus.trainning.StackOverflowApplication.vo.request.QuestionViewRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class QuestionController {
 
   @GetMapping("/get/{id}")
   public Optional<Question> getQuestionById(@PathVariable Long id) {
-    Optional<Question> question = questionService.getQuestionById(id);
+    Optional<Question> question = (questionService.getQuestionById(id));
     return question;
   }
 
