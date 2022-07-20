@@ -3,10 +3,8 @@ package com.knoldus.trainning.StackOverflowApplication.controller;
 import com.knoldus.trainning.StackOverflowApplication.entity.Question;
 import com.knoldus.trainning.StackOverflowApplication.service.QuestionService;
 import com.knoldus.trainning.StackOverflowApplication.vo.request.QuestionViewRequest;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -28,7 +26,7 @@ public class QuestionController {
     return question;
   }
 
-  @GetMapping("/get")
+  @GetMapping("/getAll")
   public List<Question> getAllQuestionByUserId() {
     return questionService.getAllQuestions();
   }
@@ -43,4 +41,5 @@ public class QuestionController {
                                  @RequestBody Question question) {
     return questionService.updateQuestion(id, question);
   }
+
 }

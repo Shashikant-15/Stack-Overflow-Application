@@ -2,43 +2,40 @@ package com.knoldus.trainning.StackOverflowApplication.controller;
 
 import com.knoldus.trainning.StackOverflowApplication.entity.Answer;
 import com.knoldus.trainning.StackOverflowApplication.entity.Question;
-import com.knoldus.trainning.StackOverflowApplication.entity.Tag;
 import com.knoldus.trainning.StackOverflowApplication.entity.User;
 import com.knoldus.trainning.StackOverflowApplication.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/question/{questionId}/answers")
+@RequestMapping("/user/answer")
 public class AnswerController {
 
   @Autowired private AnswerService answerService;
 
-  @PostMapping()
+  @PostMapping("/add")
   public void addAnswer(@RequestBody Answer answer, @PathVariable Long questionId) {
-//    answer.setQuestion(new Question(questionId, "", "", new User()));
-//    answerService.addAnswer(answer);
+
   }
 
-  @GetMapping("/{id}")
+  @GetMapping("/get/{id}")
   public Optional<Answer> getAnswerById(@PathVariable Long id) {
     return answerService.getAllAnswersById(id);
   }
 
-  @GetMapping()
+  @GetMapping("/getAll")
   public List<Answer> getAllAnswerByQuestionId(@PathVariable Long questionId) {
     return answerService.getAllAnswers(questionId);
   }
 
-  @DeleteMapping("/{id}")
+  @DeleteMapping("/delete/{id}")
   public void deleteAnswerById(@PathVariable Long id) {
     answerService.deleteAnswer(id);
   }
 
-  @PutMapping("/{id}")
+  @PutMapping("/update/{id}")
   public void updateAnswerById(@RequestBody Answer answer, @PathVariable Long questionId) {
 //    answer.setQuestion(new Question(questionId, "", "", new User()));
     answerService.updateAnswer(answer);

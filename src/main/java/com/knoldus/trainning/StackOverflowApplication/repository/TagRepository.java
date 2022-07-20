@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TagRepository extends CrudRepository<Tag, Long> {
 
-  Optional<Tag> findByName(String name);
+//  Optional<Tag> findByName(String name);
 }

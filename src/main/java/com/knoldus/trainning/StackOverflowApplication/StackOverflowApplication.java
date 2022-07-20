@@ -10,5 +10,4 @@ public class StackOverflowApplication {
   public static void main(String[] args) {
     SpringApplication.run(StackOverflowApplication.class, args);
   }
-
 }

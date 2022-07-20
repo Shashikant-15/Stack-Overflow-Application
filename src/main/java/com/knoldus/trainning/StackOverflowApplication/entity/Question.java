@@ -3,7 +3,6 @@ package com.knoldus.trainning.StackOverflowApplication.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -27,7 +26,7 @@ public class Question {
 
   @OneToMany(cascade = CascadeType.ALL,
           fetch = FetchType.LAZY)
-  @JoinColumn(name = "question_id",
+  @JoinColumn(
           referencedColumnName = "id")
   private List<Answer> answerList;
 
