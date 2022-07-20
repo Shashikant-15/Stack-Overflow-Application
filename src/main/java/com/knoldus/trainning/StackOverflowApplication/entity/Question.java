@@ -3,8 +3,10 @@ package com.knoldus.trainning.StackOverflowApplication.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,32 +14,38 @@ import java.util.Date;
 @Entity
 @Table(name = "question")
 public class Question {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(nullable = false)
+  private long id;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "questionId",nullable = false)
-    private long questionId;
+  @Column(name = "questionTitle", nullable = false, unique = true)
+  private String questionTitle;
 
-    @Column(name = "questionTitle", nullable = false,unique = true)
-    private String questionTitle;
+  @Column(name = "questionDescription")
+  private String questionDescription;
 
-    private String questionDescription;
+  @OneToMany(cascade = CascadeType.ALL,
+          fetch = FetchType.LAZY)
+  @JoinColumn(name = "question_id",
+          referencedColumnName = "id")
+  private List<Answer> answerList;
 
-//    @ManyToMany
-//    private Tag tag;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date createdAt;
 
-//    @OneToMany
-//   private Answer answer;
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date updatedAt;
 
-//    @ManyToOne
-//    private User user;
+  @PrePersist
+  public void prePersist() {
+    createdAt = new Date();
+    updatedAt = new Date();
+  }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdAt;
+  @PreUpdate
+  public void preUpdate() {
+    updatedAt = new Date();
+  }
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updatedAt;
-
-    public Question(Long questionId, String s, String s1) {
-    }
 }

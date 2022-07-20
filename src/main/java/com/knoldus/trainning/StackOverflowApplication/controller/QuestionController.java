@@ -1,45 +1,46 @@
 package com.knoldus.trainning.StackOverflowApplication.controller;
 
+import com.knoldus.trainning.StackOverflowApplication.entity.Question;
+import com.knoldus.trainning.StackOverflowApplication.service.QuestionService;
+import com.knoldus.trainning.StackOverflowApplication.vo.request.QuestionViewRequest;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("user/{userId}/questions")
-@AllArgsConstructor
+import java.util.List;
+import java.util.Optional;
+
 @RestController
+@RequestMapping("/user/question")
 public class QuestionController {
 
+  @Autowired
+  private QuestionService questionService;
 
-    @PostMapping()
-    public void addNewQuestion( ) {
+  @PostMapping("/add")
+  public void addNewQuestion(@RequestBody QuestionViewRequest questionViewRequest) {
+    questionService.save(questionViewRequest);
+  }
 
-    }
+  @GetMapping("/get/{id}")
+  public Optional<Question> getQuestionById(@PathVariable Long id) {
+    Optional<Question> question = questionService.getQuestionById(id);
+    return question;
+  }
 
+  @GetMapping("/get")
+  public List<Question> getAllQuestionByUserId() {
+    return questionService.getAllQuestions();
+  }
 
-    @GetMapping("/{id}")
-    public void getQuestionById(@PathVariable Long id ) {
+  @DeleteMapping("/delete/{id}")
+  public void deleteQuestionById(@PathVariable Long id) {
+    questionService.deleteById(id);
+  }
 
-    }
-    @GetMapping()
-    public void getAllQuestionByUserId(@PathVariable Long userId ) {
-
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteQuestionById(@PathVariable Long id) {
-
-    }
-
-
-    @PutMapping("/{id}")
-    public void updateQuestionById(){
-
-    }
-
-
+  @PutMapping("/update/{id}")
+  public Question updateQuestionById(@PathVariable(value = "id") Long id,
+                                 @RequestBody Question question) {
+    return questionService.updateQuestion(id, question);
+  }
 }

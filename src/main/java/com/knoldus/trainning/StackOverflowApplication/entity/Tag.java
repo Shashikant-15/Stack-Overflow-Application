@@ -12,17 +12,14 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tag")
 public class Tag {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "tagId", nullable = false)
-    private Long tagId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "tagId", nullable = false)
+  private Long id;
 
-    @Column(name = "tagName", unique = true, nullable = false)
-    private String tagName;
+  @Column(name = "tagName", unique = true, nullable = false)
+  private String name;
 
-
-
-
-
-
+  @ManyToOne
+  private Question question;
 }

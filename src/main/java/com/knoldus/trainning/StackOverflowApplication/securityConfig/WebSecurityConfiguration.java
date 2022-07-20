@@ -15,37 +15,34 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Bean
-    AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider
-                = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
-        provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
-        return provider;
-    }
+  @Autowired private UserDetailsService userDetailsService;
 
-    private static final String[] AUTH_LIST = {
-            // -- swagger ui
-            "**/swagger-resources/**",
-            "/swagger-ui.html",
-            "/v2/api-docs",
-            "/webjars/**"
-    };
+  @Bean
+  AuthenticationProvider authenticationProvider() {
+    DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+    provider.setUserDetailsService(userDetailsService);
+    provider.setPasswordEncoder(NoOpPasswordEncoder.getInstance());
+    return provider;
+  }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
-                .antMatchers(AUTH_LIST).permitAll()
-                .antMatchers("/","/new","/save").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .and()
-                .httpBasic();
-    }
+  private static final String[] AUTH_LIST = {
+    // -- swagger ui
+    "**/swagger-resources/**", "/swagger-ui.html", "/v2/api-docs", "/webjars/**"
+  };
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http.authorizeRequests()
+        .antMatchers(AUTH_LIST)
+        .permitAll()
+        .antMatchers("/", "/new", "/save")
+        .permitAll()
+        .anyRequest()
+        .authenticated()
+        .and()
+        .formLogin()
+        .and()
+        .httpBasic()
+            .and().csrf().disable();
+  }
 }
-
-
