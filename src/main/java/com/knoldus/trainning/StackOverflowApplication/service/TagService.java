@@ -17,17 +17,14 @@ public class TagService {
     List <Tag> tagList = new ArrayList<>();
 
     public Optional<Tag> getAllTag(Long tagId) {
-
         return tagRepository.findById(tagId);
     }
 
     public Optional<Tag> getAllTagByName(String name){
-
         return tagRepository.findByName(name);
     }
 
-    public List<Tag> findAll() {
-
+    public List<Tag> getAllTagsList() {
         tagList = (List<Tag>) tagRepository.findAll();
         return tagList;
     }

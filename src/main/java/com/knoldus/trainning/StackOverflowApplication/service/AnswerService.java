@@ -14,8 +14,8 @@ public class AnswerService {
 
   @Autowired private AnswerRepository answerRepository;
 
-  public List<Answer> getAllAnswers(Long userId) {
-    return new ArrayList<>(answerRepository.findByQuestionId(userId));
+  public List<Answer> getAllAnswers(Long questionId) {
+    return new ArrayList<>(answerRepository.findByQuestionId(questionId));
   }
 
   public void addAnswer(Answer answer) {
