@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/user/answer")
+@RequestMapping("/users/question/answer")
 public class AnswerController {
 
   @Autowired private AnswerService answerService;

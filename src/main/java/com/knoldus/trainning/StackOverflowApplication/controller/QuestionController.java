@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/user/question")
+@RequestMapping("/users/question")
 public class QuestionController {
 
   @Autowired
