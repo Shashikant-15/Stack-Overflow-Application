@@ -14,7 +14,6 @@ public class HomeController {
   @GetMapping("/")
   public ModelAndView homePage() {
     ModelAndView mv = new ModelAndView("home");
-
     return mv;
   }
 
@@ -44,7 +43,6 @@ public class HomeController {
    */
   @GetMapping("/user/home")
   public String userDetails() {
-
     return "Hello";
   }
 }

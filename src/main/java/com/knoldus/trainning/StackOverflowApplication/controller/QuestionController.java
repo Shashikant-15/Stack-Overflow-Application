@@ -1,31 +1,65 @@
 package com.knoldus.trainning.StackOverflowApplication.controller;
 
-import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.knoldus.trainning.StackOverflowApplication.entity.Question;
+import com.knoldus.trainning.StackOverflowApplication.entity.Tag;
+import com.knoldus.trainning.StackOverflowApplication.service.QuestionService;
+import com.knoldus.trainning.StackOverflowApplication.service.TagService;
+import com.knoldus.trainning.StackOverflowApplication.vo.request.QuestionViewRequest;
+import com.knoldus.trainning.StackOverflowApplication.vo.responce.QuestionResponce;
+import com.knoldus.trainning.StackOverflowApplication.vo.responce.QuestionResponeWithView;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-@RequestMapping("user/{userId}/questions")
-@AllArgsConstructor
+import java.util.List;
+import java.util.Optional;
+
 @RestController
+@RequestMapping("/user/question")
 public class QuestionController {
 
-  @PostMapping()
-  public void addNewQuestion() {}
+  @Autowired
+  private TagService tagService;
 
-  @GetMapping("/{id}")
-  public void getQuestionById(@PathVariable Long id) {}
+  @Autowired
+  private QuestionService questionService;
 
-  @GetMapping()
-  public void getAllQuestionByUserId(@PathVariable Long userId) {}
+  static Long totalNumberOfViews = 0l;
 
-  @DeleteMapping("/{id}")
-  public void deleteQuestionById(@PathVariable Long id) {}
+  @PostMapping("/add")
+  public Long addNewQuestion(@RequestBody QuestionViewRequest questionViewRequest) {
+    return questionService.save(questionViewRequest);
+  }
 
-  @PutMapping("/{id}")
-  public void updateQuestionById() {}
+  @GetMapping("/get/{id}")
+  public QuestionResponeWithView getQuestionByIds(@PathVariable Long id) {
+    totalNumberOfViews++;
+    QuestionResponeWithView questionResponce = new QuestionResponeWithView();
+    Optional<Question> optionalEntity =  questionService.getQuestionById(id);
+    Question question = optionalEntity.get();
+    questionResponce.setTagName(question.getTag().getName());
+    questionResponce.setId(question.getId());
+    questionResponce.setTotalNumberOfViews(totalNumberOfViews);
+    questionResponce.setQuestionTitle(question.getQuestionTitle());
+    questionResponce.setQuestionDescription(question.getQuestionDescription());
+    questionResponce.setCreatedAt(question.getCreatedAt());
+    questionResponce.setUpdatedAt(question.getUpdatedAt());
+    return questionResponce;
+  }
+
+  @DeleteMapping("/delete/{id}")
+  public void deleteQuestionById(@PathVariable Long id) {
+    questionService.deleteById(id);
+  }
+
+  @PutMapping("/update/{id}")
+  public QuestionResponce updateQuestionById(@PathVariable(value = "id") Long id,
+                                 @RequestBody QuestionViewRequest questionViewRequest) {
+    return questionService.updateQuestion(id, questionViewRequest);
+  }
+
+  @GetMapping("/getAll")
+  public List<QuestionResponce> getAllQuestions() {
+    return questionService.getAllQuestions();
+  }
+
 }
