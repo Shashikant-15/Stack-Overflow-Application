@@ -14,8 +14,11 @@ import java.util.List;
 @Table(name = "question")
 public class Question {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(nullable = false)
+  @SequenceGenerator(name = "question_sequence",
+          sequenceName = "question_sequence",
+          allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE,
+          generator = "question_sequence")
   private long id;
 
   @Column(name = "questionTitle", nullable = false, unique = true)
@@ -24,11 +27,11 @@ public class Question {
   @Column(name = "questionDescription")
   private String questionDescription;
 
-//  @OneToMany(cascade = CascadeType.ALL,
-//          fetch = FetchType.LAZY)
-//  @JoinColumn(
-//          referencedColumnName = "id")
-//  private List<Answer> answerList;
+  @ManyToOne(cascade = CascadeType.ALL,
+          fetch = FetchType.LAZY)
+  @JoinColumn(
+          referencedColumnName = "id")
+  private Tag tag;
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;

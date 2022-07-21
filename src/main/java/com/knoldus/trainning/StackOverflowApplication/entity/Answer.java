@@ -13,8 +13,12 @@ import java.util.Date;
 @Table(name = "answer")
 public class Answer {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "answerId", nullable = false)
+  @SequenceGenerator(name = "answer_sequence",
+          sequenceName = "answer_sequence",
+          allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE,
+          generator = "answer_sequence")
+  @Column(name = "answerId")
   private Long id;
 
   @Column(name = "inputAnswer", nullable = false)
