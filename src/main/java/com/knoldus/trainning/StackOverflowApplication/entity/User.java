@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Data
 @AllArgsConstructor
@@ -28,9 +31,14 @@ public class User {
   @Column(nullable = false)
   private String email;
 
+  @NotEmpty
+  @Size(min = 2, message = "Answer should have at least 2 characters")
   @Column(nullable = false)
   private String password;
 
   @Column(nullable = false)
   private String address;
+
+    public <T> User(String username, String s, Collection<T> unmodifiableCollection) {
+    }
 }

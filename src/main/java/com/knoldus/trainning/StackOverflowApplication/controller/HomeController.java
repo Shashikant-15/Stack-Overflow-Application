@@ -4,8 +4,13 @@ import com.knoldus.trainning.StackOverflowApplication.CO.UserCO;
 import com.knoldus.trainning.StackOverflowApplication.entity.User;
 import com.knoldus.trainning.StackOverflowApplication.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
 
 @RestController
 public class HomeController {
@@ -25,7 +30,8 @@ public class HomeController {
   }
 
   @PostMapping("/save")
-  public ModelAndView save(@ModelAttribute("UserCO") UserCO userCO) {
+//  public ModelAndView save(@Valid @ModelAttribute("UserCO") UserCO userCO) {
+  public ModelAndView save(@Valid @RequestBody UserCO userCO) {
     ModelAndView mv = new ModelAndView("redirect:/");
     User user =
         new User(
