@@ -1,7 +1,12 @@
 package com.knoldus.trainning.StackOverflowApplication.service;
 
 import com.knoldus.trainning.StackOverflowApplication.entity.Answer;
+import com.knoldus.trainning.StackOverflowApplication.entity.Question;
+import com.knoldus.trainning.StackOverflowApplication.exception.ResourceNotFoundException;
 import com.knoldus.trainning.StackOverflowApplication.repository.AnswerRepository;
+import com.knoldus.trainning.StackOverflowApplication.vo.request.AnswerViewRequest;
+import com.knoldus.trainning.StackOverflowApplication.vo.responce.AnswerResponce;
+import com.knoldus.trainning.StackOverflowApplication.vo.responce.QuestionResponce;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -12,36 +17,68 @@ import java.util.Optional;
 @Service
 public class AnswerService {
 
+  @Autowired
+  private QuestionService questionService;
+
   @Autowired private AnswerRepository answerRepository;
 
-  public List<Answer> getAllAnswers(Long userId) {
-    return new ArrayList<>((Collection) answerRepository.findAll());
-  }
-
-  public List<Answer> save(Long id, List<String> answerList) {
-    List<Answer> answerList1 = new ArrayList<>();
-    for (String answer1 : answerList) {
-      Answer answer = new Answer();
-      answer.setInputAnswer(answer1);
-      answerList1.add(answer);
-      answerRepository.save(answer);
+  public List<AnswerResponce> getAllAnswers(Long questionId) {
+    List<AnswerResponce> answerResponceList = new ArrayList<>();
+    List<Answer> answerList = answerRepository.findByQuestionId(questionId);
+    for(Answer answer : answerList) {
+      AnswerResponce answerResponce = new AnswerResponce();
+      answerResponce.setInputAnswer(answer.getInputAnswer());
+      answerResponce.setQuestionId(questionId);
+      answerResponce.setCreatedAt(answer.getCreatedAt());
+      answerResponce.setUpdatedAt(answer.getUpdatedAt());
+      answerResponceList.add(answerResponce);
     }
-    return answerList1;
+    return answerResponceList;
   }
 
-  public void addAnswer(Answer answer) {
-    answerRepository.save(answer);
+  public Long save(AnswerViewRequest answerViewRequest) {
+    System.out.println("Inside save");
+    Answer answer = new Answer();
+    answer.setInputAnswer(answerViewRequest.getInputAnswer());
+    Optional<Question> optionalEntity =
+            questionService.getQuestionById(answerViewRequest.getQuestionId());
+    Question roomEntity = optionalEntity.get();
+    System.out.println(roomEntity);
+    answer.setQuestion(roomEntity);
+    if(questionService.getQuestionById(answerViewRequest.getQuestionId()) != null) {
+      answerRepository.save(answer);
+    } else {
+      System.out.println("Question does not exist");
+    }
+    Answer savedAnswer =
+            answerRepository.findByInputAnswer(answerViewRequest.getInputAnswer());
+    Long answerIds = savedAnswer.getId();
+    return answerIds;
   }
 
-  public void updateAnswer(Answer answer) {
-    answerRepository.save(answer);
+  public AnswerResponce updateAnswer(Long id, AnswerViewRequest request) {
+    AnswerResponce answerResponce = new AnswerResponce();
+    return answerRepository.findById(id).map(answer -> {
+      answer.setInputAnswer(request.getInputAnswer());
+      Optional<Answer> optionalEntity =  answerRepository.findById(id);
+      Answer answer2 = optionalEntity.get();
+      answer.setQuestion(answer2.getQuestion());
+      answerRepository.save(answer);
+      Optional<Answer> optionalEntitys =  answerRepository.findById(id);
+      Answer answer1 = optionalEntitys.get();
+      answerResponce.setQuestionId(id);
+      answerResponce.setInputAnswer(request.getInputAnswer());
+      answerResponce.setCreatedAt(answer1.getCreatedAt());
+      answerResponce.setUpdatedAt(answer1.getUpdatedAt());
+      return answerResponce;
+    }).orElseThrow(() -> new ResourceNotFoundException("Question with id : " + id + " not found"));
   }
 
   public void deleteAnswer(Long id) {
     answerRepository.deleteById(id);
   }
 
-  public Optional<Answer> getAllAnswersById(Long id) {
+  public Optional<Answer> getAnswersById(Long id) {
     return answerRepository.findById(id);
   }
 }

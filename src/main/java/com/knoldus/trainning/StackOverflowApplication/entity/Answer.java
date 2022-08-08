@@ -13,12 +13,22 @@ import java.util.Date;
 @Table(name = "answer")
 public class Answer {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "answerId", nullable = false)
+  @SequenceGenerator(name = "answer_sequence",
+          sequenceName = "answer_sequence",
+          allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE,
+          generator = "answer_sequence")
+  @Column(name = "answerId")
   private Long id;
 
   @Column(name = "inputAnswer", nullable = false)
   private String inputAnswer;
+
+  @ManyToOne(cascade = CascadeType.ALL,
+          fetch = FetchType.LAZY)
+  @JoinColumn(
+          referencedColumnName = "id")
+  private Question question;
 
   @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;

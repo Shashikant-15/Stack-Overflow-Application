@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,13 +15,13 @@ import javax.persistence.*;
 @Table(name = "tag")
 public class Tag {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "tagId", nullable = false)
+  @SequenceGenerator(name = "tag_sequence",
+          sequenceName = "tag_sequence",
+          allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE,
+          generator = "tag_sequence")
   private Long id;
 
   @Column(name = "tagName", unique = true, nullable = false)
   private String name;
-
-  @ManyToOne
-  private Question question;
 }

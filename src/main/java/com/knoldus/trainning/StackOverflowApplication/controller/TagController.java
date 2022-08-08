@@ -1,16 +1,17 @@
 package com.knoldus.trainning.StackOverflowApplication.controller;
 
+import com.knoldus.trainning.StackOverflowApplication.vo.responce.TagResponse;
 import org.springframework.web.bind.annotation.RestController;
 import com.knoldus.trainning.StackOverflowApplication.entity.Tag;
 import com.knoldus.trainning.StackOverflowApplication.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/tags")
+@RequestMapping("/user/tags")
 public class TagController {
     @Autowired
     private TagService tagService;
@@ -20,13 +21,14 @@ public class TagController {
         return tagService.getAllTagsList();
     }
 
-    @GetMapping("/{name}")
-    public Optional<Tag> getAllTagsByName(@PathVariable Long id) {
-        return tagService.getAllTagById(id);
+    @GetMapping("/get/questions")
+    public List<TagResponse> getQuestionsByTag(String string) {
+        List<TagResponse> tagResponseList = tagService.findTagIdByName(string);
+        return tagResponseList;
     }
 
-    @PostMapping()
-    public void AddTag(@RequestBody Tag tag) {
-
+    @PostMapping("/add/{name}")
+    public void AddTag(@PathVariable (value = "name") @Valid String tag) {
+        tagService.save(tag);
     }
 }

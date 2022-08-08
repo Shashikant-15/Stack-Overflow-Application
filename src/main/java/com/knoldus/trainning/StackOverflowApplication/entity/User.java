@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 @Data
 @AllArgsConstructor
@@ -12,15 +14,21 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
+
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
-  @Column(name = "id", nullable = false)
+  @SequenceGenerator(name = "user_sequence",
+          sequenceName = "user_sequence",
+          allocationSize = 1)
+  @GeneratedValue(strategy = GenerationType.SEQUENCE,
+          generator = "user_sequence")
+  @Column(name = "id")
   private Long id;
 
   @Column(unique = true, nullable = false)
   private String username;
 
   @Column(nullable = false)
+
   private String email;
 
   @Column(nullable = false)

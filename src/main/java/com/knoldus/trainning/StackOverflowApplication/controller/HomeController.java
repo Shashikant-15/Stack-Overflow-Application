@@ -7,14 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
+
 @RestController
 public class HomeController {
   @Autowired private UserRepository userRepository;
 
   @GetMapping("/")
+//  @RolesAllowed("admin")
   public ModelAndView homePage() {
     ModelAndView mv = new ModelAndView("home");
-
     return mv;
   }
 
@@ -26,7 +29,7 @@ public class HomeController {
   }
 
   @PostMapping("/save")
-  public ModelAndView save(@ModelAttribute("UserCO") UserCO userCO) {
+  public ModelAndView save(@Valid @RequestBody UserCO userCO) {
     ModelAndView mv = new ModelAndView("redirect:/");
     User user =
         new User(
@@ -43,8 +46,9 @@ public class HomeController {
    * @return home page .
    */
   @GetMapping("/user/home")
+//  @RolesAllowed("admin")
+  @RolesAllowed("user")
   public String userDetails() {
-
     return "Hello";
   }
 }
