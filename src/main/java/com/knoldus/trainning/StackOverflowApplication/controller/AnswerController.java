@@ -7,11 +7,14 @@ import com.knoldus.trainning.StackOverflowApplication.vo.responce.AnswerResponce
 import com.knoldus.trainning.StackOverflowApplication.vo.responce.AnswerResponseWithView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/user/answer")
+@RequestMapping("/users/question/answer")
 public class AnswerController {
 
   @Autowired private AnswerService answerService;
@@ -19,7 +22,7 @@ public class AnswerController {
   Long totalNumberOfViews = 0l;
 
   @PostMapping("/add")
-  public Long addAnswer(@RequestBody AnswerViewRequest answerViewRequest) {
+  public Long addAnswer(@Valid @RequestBody @Min(value = 1, message = "Minimum 1 value required") AnswerViewRequest answerViewRequest) {
     return answerService.save(answerViewRequest);
   }
 

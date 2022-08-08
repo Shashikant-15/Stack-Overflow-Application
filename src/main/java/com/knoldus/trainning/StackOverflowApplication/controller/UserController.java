@@ -5,6 +5,7 @@ import com.knoldus.trainning.StackOverflowApplication.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +16,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping()
-    public void addUser(@RequestBody User user) {
+    public void addUser(@Valid @RequestBody  User user) {
         userService.addUser(user);
     }
 

@@ -6,6 +6,8 @@ import com.knoldus.trainning.StackOverflowApplication.entity.Tag;
 import com.knoldus.trainning.StackOverflowApplication.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -26,7 +28,7 @@ public class TagController {
     }
 
     @PostMapping("/add/{name}")
-    public void AddTag(@PathVariable (value = "name") String tag) {
+    public void AddTag(@PathVariable (value = "name") @Valid String tag) {
         tagService.save(tag);
     }
 }

@@ -10,11 +10,13 @@ import com.knoldus.trainning.StackOverflowApplication.vo.responce.QuestionRespon
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/user/question")
+@RequestMapping("/users/question")
 public class QuestionController {
 
   @Autowired
@@ -26,12 +28,14 @@ public class QuestionController {
   static Long totalNumberOfViews = 0l;
 
   @PostMapping("/add")
-  public Long addNewQuestion(@RequestBody QuestionViewRequest questionViewRequest) {
+  public Long addNewQuestion(@Valid@RequestBody  QuestionViewRequest questionViewRequest) {
     return questionService.save(questionViewRequest);
   }
 
   @GetMapping("/get/{id}")
-  public QuestionResponeWithView getQuestionByIds(@PathVariable Long id) {
+  public QuestionResponeWithView getQuestionByIds(
+          @Valid @PathVariable @Min(value = 1, message = "Minimum 1 value required")Long id) {
+
     totalNumberOfViews++;
     QuestionResponeWithView questionResponce = new QuestionResponeWithView();
     Optional<Question> optionalEntity =  questionService.getQuestionById(id);
