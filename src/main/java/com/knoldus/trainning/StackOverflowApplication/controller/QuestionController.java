@@ -8,13 +8,19 @@ import com.knoldus.trainning.StackOverflowApplication.vo.request.QuestionViewReq
 import com.knoldus.trainning.StackOverflowApplication.vo.responce.QuestionResponce;
 import com.knoldus.trainning.StackOverflowApplication.vo.responce.QuestionResponeWithView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/user/question")
+@Validated
 public class QuestionController {
 
   @Autowired
@@ -26,12 +32,13 @@ public class QuestionController {
   static Long totalNumberOfViews = 0l;
 
   @PostMapping("/add")
-  public Long addNewQuestion(@RequestBody QuestionViewRequest questionViewRequest) {
+  public Long addNewQuestion(@Valid @RequestBody QuestionViewRequest questionViewRequest) {
     return questionService.save(questionViewRequest);
   }
 
   @GetMapping("/get/{id}")
-  public QuestionResponeWithView getQuestionByIds(@PathVariable Long id) {
+  public QuestionResponeWithView getQuestionByIds(
+          @Valid @PathVariable @Min(value = 1, message = "Minimum 1 value required") Long id) {
     totalNumberOfViews++;
     QuestionResponeWithView questionResponce = new QuestionResponeWithView();
     Optional<Question> optionalEntity =  questionService.getQuestionById(id);
@@ -47,17 +54,19 @@ public class QuestionController {
   }
 
   @DeleteMapping("/delete/{id}")
-  public void deleteQuestionById(@PathVariable Long id) {
+  public void deleteQuestionById(@Valid @PathVariable @Min(value = 1, message = "Minimum 1 value required") Long id) {
     questionService.deleteById(id);
   }
 
   @PutMapping("/update/{id}")
   public QuestionResponce updateQuestionById(@PathVariable(value = "id") Long id,
-                                 @RequestBody QuestionViewRequest questionViewRequest) {
+                                 @Valid @RequestBody QuestionViewRequest questionViewRequest) {
     return questionService.updateQuestion(id, questionViewRequest);
   }
 
   @GetMapping("/getAll")
+  @PreAuthorize("hasAuthority('USER')")
+//  @RolesAllowed("USER")
   public List<QuestionResponce> getAllQuestions() {
     return questionService.getAllQuestions();
   }

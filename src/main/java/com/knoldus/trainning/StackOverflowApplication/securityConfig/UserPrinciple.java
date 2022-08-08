@@ -16,9 +16,15 @@ public class UserPrinciple implements UserDetails {
     this.user = user;
   }
 
+//  @Override
+//  public Collection<? extends GrantedAuthority> getAuthorities() {
+//    return Collections.singleton(new SimpleGrantedAuthority("Null"));
+//  }
+
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
-    return Collections.singleton(new SimpleGrantedAuthority("Null"));
+    return Collections.singleton(new SimpleGrantedAuthority("admin"));
+
   }
 
   @Override

@@ -6,12 +6,16 @@ import com.knoldus.trainning.StackOverflowApplication.vo.request.AnswerViewReque
 import com.knoldus.trainning.StackOverflowApplication.vo.responce.AnswerResponce;
 import com.knoldus.trainning.StackOverflowApplication.vo.responce.AnswerResponseWithView;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/user/answer")
+@Validated
 public class AnswerController {
 
   @Autowired private AnswerService answerService;
@@ -19,12 +23,12 @@ public class AnswerController {
   Long totalNumberOfViews = 0l;
 
   @PostMapping("/add")
-  public Long addAnswer(@RequestBody AnswerViewRequest answerViewRequest) {
+  public Long addAnswer(@Valid @RequestBody AnswerViewRequest answerViewRequest) {
     return answerService.save(answerViewRequest);
   }
 
   @GetMapping("/get/{id}")
-  public AnswerResponseWithView getAnswerById(@PathVariable Long id) {
+  public AnswerResponseWithView getAnswerById(@Valid @PathVariable @Min(value = 1, message = "Minimum 1 value required") Long id) {
     totalNumberOfViews++;
     AnswerResponseWithView answerResponce = new AnswerResponseWithView();
     Optional<Answer> optionalEntity =  answerService.getAnswersById(id);
@@ -38,19 +42,20 @@ public class AnswerController {
   }
 
   @DeleteMapping("/delete/{id}")
-  public void deleteAnswerById(@PathVariable Long id) {
+  public void deleteAnswerById(@Valid @PathVariable @Min(value = 1, message = "Minimum 1 value required") Long id) {
     answerService.deleteAnswer(id);
   }
 
   @PutMapping("/update/{id}")
   public AnswerResponce updateAnswerById(@PathVariable Long id,
-                                         @RequestBody AnswerViewRequest answerViewRequest) {
+                                         @Valid @RequestBody AnswerViewRequest answerViewRequest) {
 //    answer.setQuestion(new Question(questionId, "", "", new User()));
     return answerService.updateAnswer(id, answerViewRequest);
   }
 
   @GetMapping("/getAll/{questionId}")
-  public List<AnswerResponce> getAllAnswer(@PathVariable Long questionId) {
+  public List<AnswerResponce> getAllAnswer(
+          @Valid @PathVariable @Min(value = 1, message = "Minimum 1 character required") Long questionId) {
     return answerService.getAllAnswers(questionId);
   }
 }
